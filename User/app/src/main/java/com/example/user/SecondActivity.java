@@ -13,17 +13,17 @@ public class SecondActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_second);
         TextView sname = findViewById(R.id.sname);
         TextView snumber = findViewById(R.id.snumber);
         TextView semail = findViewById(R.id.semail);
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
+
 
         Bundle bund = getIntent().getExtras();
 
-        sname.setText( bund.getString("user"));
+        sname.setText("Hello "+bund.getString("user"));
         snumber.setText( bund.getString("phon"));
         semail.setText( bund.getString("eml"));
 
@@ -32,8 +32,24 @@ public class SecondActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent callint = new Intent(Intent.ACTION_DIAL);
-                callint.setData(Uri.parse("tel:"+bund.getString("phon")));
+                callint.setData(Uri.parse("tel:"+ bund.getString("phon")));
+                startActivity(callint);
 
+
+            }
+        });
+
+        semail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.putExtra(Intent.EXTRA_EMAIL,"eml");
+                email.putExtra(Intent.EXTRA_SUBJECT,"sub");
+                email.putExtra(Intent.EXTRA_TEXT, "message");
+
+                email.setType("text/plain");
+
+                startActivity(Intent.createChooser(email,"Send Email:"));
 
             }
         });

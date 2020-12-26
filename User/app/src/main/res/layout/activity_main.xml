@@ -14,7 +14,8 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        android:background="@drawable/girl" />
+        android:alpha="0.8"
+        android:background="@drawable/grl" />
 
     <EditText
         android:id="@+id/Username"
